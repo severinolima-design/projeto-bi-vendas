@@ -70,5 +70,18 @@ with col1:
     st.dataframe(df, use_container_width=True)
 
 with col2:
-    st.subheader("📈 Faturamento por Produto")
-    st.bar_chart(data=df, x="produto", y="valor")
+st.subheader("📈 Faturamento por Produto")
+st.bar_chart(data=df, x="produto", y="valor")
+# --- NOVA FUNCIONALIDADE PARA AC2: EXPORTAR DADOS ---
+st.subheader("📥 Exportar Relatório de Vendas")
+
+# Transforma os dados em CSV
+csv = df.to_csv(index=False).encode('utf-8')
+
+# Botão de download no Streamlit
+st.download_button(
+    label="Download do Relatório (CSV)",
+    data=csv,
+    file_name="relatorio_vendas_ac2.csv",
+    mime="text/csv",
+)
